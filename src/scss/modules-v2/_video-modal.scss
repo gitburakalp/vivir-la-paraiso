@@ -1,0 +1,71 @@
+.modal {
+  font-family: $v2_ff-sans-serif;
+  line-height: 1.43;
+  font-weight: 400;
+  color: $color-warm-grey;
+  -webkit-overflow-scrolling: touch;
+  background-color: rgba($color-pastel-black, 0.75);
+  margin-top: 0 !important;
+
+  @include media-breakpoint-down(sm) {
+    background-color: $color-black
+  }
+
+  &--video {
+    video {
+      width: 100%;
+    }
+
+    iframe {
+      width: 100.1%;
+      height: 50vh;
+
+      @include media-breakpoint-up(md) {
+        height: 100%;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      max-width: 640px;
+    }
+
+    @media screen and (min-width: 1280px) {
+      max-width: 806px;
+    }
+
+    @media screen and (min-width: 1366px) {
+      max-width: 892px;
+    }
+
+    @media screen and (min-width: 1920px) {
+      max-width: 1280px;
+    }
+
+    .modal {
+      &-body {
+        padding: 0;
+      }
+
+      &-content {
+        background-color: black;
+        padding: 0;
+
+        @media screen and (min-width: 1024px) {
+          height: 360px;
+        }
+
+        @media screen and (min-width: 1280px) {
+          height: 453px;
+        }
+
+        @media screen and (min-width: 1366px) {
+          height: 502px;
+        }
+
+        @media screen and (min-width: 1920px) {
+          height: 720px;
+        }
+      }
+    }
+  }
+}

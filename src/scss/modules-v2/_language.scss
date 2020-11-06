@@ -1,0 +1,31 @@
+.language {
+    font-family: $v2_ff-sans-serif;
+    color: $color-white;
+    
+    @include media-breakpoint-up(md) {
+        font-size: fluidSize(12,16,768,1920)
+    }
+
+    &:focus {
+        color: $color-white
+    }
+}
+
+.dropdown {
+    display: flex;
+    align-items: center;
+
+    &-menu {
+        min-width: unset;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    &-item {
+        font-family: $v2_ff-sans-serif;
+
+        +* {
+            border-top: 1px solid $color-pastel-black
+        }
+    }
+}

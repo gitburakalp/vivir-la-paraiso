@@ -1,0 +1,160 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  padding: 10px 20px;
+
+  @include media-breakpoint-up(md) {
+    box-shadow: 1px 1px 1px rgba($color-white, 0.15);
+    padding: 2vh 5%;
+  }
+
+  &-nav {
+    display: flex;
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+    }
+
+    &__logo {
+      display: inline-block;
+      max-width: 65px;
+
+      @include media-breakpoint-up(md) {
+        max-width: calcPercent(100, 1919.99) + vw;
+        margin-right: 5vw;
+      }
+    }
+
+    &__menu {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+      z-index: 9999;
+      transition: all 400ms ease-in-out;
+      min-height: 0px;
+
+      @include media-breakpoint-up(md) {
+        align-items: center;
+      }
+
+      .circle-calendar {
+        border-radius: 100%;
+        border: 2px solid $color-dull-orange;
+        margin-bottom: 24px;
+        color: $color-dull-orange;
+        font-size: 16px;
+
+        width: 30px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+
+        @include media-breakpoint-up(md) {
+          display: inline-flex;
+
+          ~ .header-nav__menu-text {
+            display: inline-block;
+            vertical-align: middle;
+            color:$color-dull-orange
+          }
+        }
+      }
+
+      @include media-breakpoint-down(sm) {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        justify-content: space-around;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: $color-white;
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+        color: $color-pastel-black;
+
+        &.fh {
+          min-height: calc(100% - 11vh);
+          transition: all $durationTime;
+        }
+      }
+
+      &-text {
+        position: relative;
+        overflow: hidden;
+
+        span {
+          display: inline-block;
+          transition: all $durationTime;
+          margin-top: 5px;
+        }
+      }
+
+      &-item {
+        transition: opacity $durationTime ease;
+
+        @include media-breakpoint-down(sm) {
+          flex: 0 0 25%;
+          max-width: 25%;
+        }
+
+        &:not(.active) {
+          opacity: 0.6;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+
+        + * {
+          @include media-breakpoint-up(md) {
+            margin-left: 1vw;
+          }
+        }
+
+        &[data-elem="dateButton"] {
+          opacity: 1;
+          filter: drop-shadow(0 0 1px rgba($color-pastel-black, 0.25));
+
+          .header-nav__menu-text {
+            color:$color-dull-orange;
+          }
+
+          @include media-breakpoint-up(md) {
+            position: absolute;
+            right: 10vw;
+          }
+        }
+      }
+
+      &-link {
+        display: block;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.05vw;
+        text-align: center;
+
+        @include media-breakpoint-up(md) {
+          font-size: 14px;
+        }
+
+        @include media-breakpoint-up(lg) {
+          font-size: fluidSize(14, 16, 1400, 1920);
+        }
+      }
+
+      &-logo {
+        display: inline-block;
+        max-width: 30px;
+      }
+    }
+  }
+}

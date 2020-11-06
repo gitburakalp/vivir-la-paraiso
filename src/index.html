@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Living Rubi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/libs/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="css/events.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext');
+    @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i&subset=cyrillic,cyrillic-ext,latin-ext,vietnamese');
+    @import url('https://fonts.googleapis.com/css?family=Josefin+Slab');
+
+    .ytPlayer {
+      height: 100%;
+    }
+
+    @media screen and (min-width:1280px) {
+      #ytPlayer {
+        padding-bottom: 42.76042% !important;
+      }
+    }
+
+    .inline-YTPlayer {
+      height: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <section class="sliders-section">
+    <div class="sliders--top">
+      <figure class="figure">
+        <div class="figure__item">
+          <div class="figure__item-fill"></div>
+          <div class="figure__item-imageBlock">
+            <!-- <img src="" data-sliders--top-image> -->
+            <div id="ytPlayer" class="ytPlayer">
+            </div>
+          </div>
+      </figure>
+      <div class="sliders--top-header">
+        <a href="" class="main-logo">
+          <img class="img-fluid" src="images/logos/main-logo.png">
+        </a>
+        <div class="datepick-section">
+          <div class="row justify-content-md-center">
+            <div class="col">
+              <input id="inpDaterangepicker" class="form-control" placeholder="Please Select Date" value="01.12.2019">
+            </div>
+            <div class="col-auto pl-0">
+              <a href="#" class="btn btn--dull-orange">Ara</a>
+            </div>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-wrapper">
+            <div class="timeline-slide">
+              <p class="timeline-date">
+                <strong></strong>
+                <span>
+
+                </span>
+              </p>
+            </div>
+            <div class="timeline-slide">
+              <p class="timeline-date">
+                <strong></strong>
+                <span>
+
+                </span>
+              </p>
+            </div>
+            <div class="timeline-slide">
+              <p class="timeline-date">
+                <strong></strong>
+                <span>
+
+                </span>
+              </p>
+            </div>
+          </div>
+          <i class="fal fa-chevron-left prev timeline__controller"></i>
+          <i class="fal fa-chevron-right next timeline__controller"></i>
+        </div>
+        <ul class="lang-list lang-list--white ml-md-auto mr-md-5">
+          <li class="lang-list__item active">
+            <a href="#" class="lang-list__link" data-lang-val="tr">
+              TR
+            </a>
+          </li>
+          <li class="lang-list__item">
+            <a href="#" class="lang-list__link" data-lang-val="en">
+              EN
+            </a>
+          </li>
+          <li class="lang-list__item">
+            <a href="#" class="lang-list__link" data-lang-val="de">
+              DE
+            </a>
+          </li>
+          <li class="lang-list__item">
+            <a href="#" class="lang-list__link" data-lang-val="ru">
+              RU
+            </a>
+          </li>
+        </ul>
+        <div class="header-nav--right">
+          <div class="time">
+            <span></span>
+          </div>
+          <div class="time--select">
+
+          </div>
+        </div>
+      </div>
+      <div class="sliders--top__contents">
+
+        <div class="row align-items-md-end justify-content-md-between">
+          <div class="col-auto--mdf text-center text-md-left">
+            <div class="sliders--top-title__block">
+              <h2 class="sliders--top-title" data-slideTitle-elem>
+                Flexilis Mediterranean
+              </h2>
+            </div>
+            <div class="sliders--top-description__block">
+              <p class="sliders--top-description" data-slideDescription-elem>
+                Flexilis A’La Carte Restaurant offers guests a perfect place with a unique sea view view. Special
+                Mediterranean menu and the concept of the coastal restaurant take you to Rubi Platinum.
+                <span class="d-block font-weight-bold text-right" data-timeElem>
+
+                </span>
+              </p>
+            </div>
+            <div class="row align-items-md-center justify-content-between no-gutters">
+              <div class="col-12 text-right">
+                <a href="#" class="sliders__btn">
+                  DEVAMI
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sliders--bottom">
+      <div class="sliders--bottom__time-slider-block">
+        <div class="time-slider"></div>
+      </div>
+      <div class="sliders--slides">
+        <ul class="slider--tab-menu">
+          <li class="slider--tab-menu-item active" data-show-tab="entertainment">
+            <a class="slider--tab-menu-link">
+              <img class="slider--tab-menu-icon" src="images/svg/entertainment.svg">
+              Entertainment
+            </a>
+          </li>
+          <li class="slider--tab-menu-item" data-show-tab="flavours">
+            <a class="slider--tab-menu-link">
+              <img class="slider--tab-menu-icon" src="images/svg/flavours.svg">
+              Flavours
+            </a>
+          </li>
+          <li class="slider--tab-menu-item" data-show-tab="regius-spa">
+            <a class="slider--tab-menu-link">
+              <img class="slider--tab-menu-icon" src="images/svg/regius-spa.svg">
+              Regius Spa
+            </a>
+          </li>
+        </ul>
+        <div class="slider--tab-contents">
+          <div class="tab-contents active" data-slide-type="entertainment"
+            data-slide-type-icon="images/svg/for-kids.svg">
+            <div class="slider-container" data-slider="horizontal">
+              <div class="slider-wrapper">
+                <div class="slider-slide" data-starthour="08" data-endhour="19" data-date="25.04.2019">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <span class="slider-cards__time">
+
+                      </span>
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+
+                        <span class="marker">
+                          Location
+                          <i class="fal fa-map-marker-alt"></i>
+                        </span>
+                      </figure>
+
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 1
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide" data-video-url="W56pSmaUyJA" data-video-coverImage="images/yoga.jpg">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                        <span class="marker">
+                          Location
+                          <i class="fal fa-map-marker-alt"></i>
+                        </span>
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 2
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 3
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 4
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 4
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 4
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 4
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 4
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 4
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean 4
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-contents" data-slide-type="flavours" data-slide-type-icon="images/svg/entertainment.svg">
+            <div class="slider-container" data-slider="horizontal">
+              <div class="slider-wrapper">
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-contents" data-slide-type="regius-spa" data-slide-type-icon="images/svg/flavours.svg">
+            <div class="slider-container" data-slider="horizontal">
+              <div class="slider-wrapper">
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+                <div class="slider-slide">
+                  <a href="" class="slider-slide__link">
+                    <div class="slider-cards">
+                      <figure class="slider-cards__image-block">
+                        <img class="slider-cards__image" src="images/flexilis-rest.jpg"
+                          data-bigimage-path="images/flexilis-rest.jpg">
+                      </figure>
+                      <figcaption class="slider-cards__contents">
+                        <h6 class="slider-cards__title" data-slide-title>
+                          Flexilis Mediterranean
+                        </h6>
+                      </figcaption>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sh-controls">
+          <i class="fal fa-arrow-left prev"></i>
+          <i class="fal fa-arrow-right next"></i>
+        </div>
+      </div>
+    </div>
+  </section> 
+
+  <script src="js/libs/jquery.min.js"></script>
+  <script src="js/libs/fecha.min.js"></script>
+  <script src="js/libs/hotel-datepicker.min.js"></script>
+  <script src="js/libs/swiper.min.js"></script>
+  <script src="js/libs/popper.min.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
+  <script src="js/living.js"></script>
+  <script src="js/libs/jquery-ui.min.js"></script>
+  <script src="js/libs/jquery.mb.YTPlayer.min.js"></script>
+  <script type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+  <script type="text/javascript">
+    function playYoutubeVideo(videoUrl, image) {
+      var videoProps = {
+        // videoURL: 'W56pSmaUyJA',
+        // coverImage: 'images/yoga.jpg',
+        videoURL: videoUrl,
+        coverImage: image,
+        showControls: false,
+        autoPlay: true,
+        loop: true,
+        mute: true,
+        opacity: 1,
+        addRaster: true,
+        quality: 'highres',
+        playOnlyIfVisible: false,
+        useOnMobile: false,
+        containment: 'self'
+      };
+
+      $("#ytPlayer").data('property', videoProps);
+
+      jQuery("#ytPlayer").YTPlayer();
+    }
+
+    $(function () {
+      $('.slider-slide').each(function () {
+        $(this).on('click', function (e) {
+          e.preventDefault();
+          var $this = $(this);
+          var videoUrl = $this.data('video-url');
+          var videoCoverImage = $this.data('video-coverimage');
+          playYoutubeVideo(videoUrl, videoCoverImage);
+        });
+      })
+    })
+  </script>
+
+</body>
+
+</html>

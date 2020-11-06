@@ -1,0 +1,459 @@
+@using Klonbits.CMSBits.Application.Contracts.ContentManagement
+@using Klonbits.CMSBits.Application.Contracts.Application
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer T
+@model ClientEventListViewModel
+@{
+    var serviceTypeList = Model.ServiceTypeModels;
+    Layout = "~/Views/Shared/LeanLayout.cshtml";
+    var dayCount = (int)Model.EndDate.Subtract(Model.StartDate).TotalDays;
+    var lang = System.Threading.Thread.CurrentThread.CurrentCulture.Name.Split("-")[0];
+}
+<input type="hidden" id="hdnDefaultBigImage" value="https://www.rubiplatinum.com/Storage/f7058a68-9db0-478e-a0cf-5f86b45c8761.jpg" />
+<input type="hidden" id="hdnDayCount" value="@dayCount" />
+<input type="hidden" id="hdnStartDate" value="@Model.StartDate.ToString("dd.MM.yyyy")" />
+<section class="sliders-section">
+    <div class="sliders--top">
+        <figure class="figure">
+            <div class="figure__item">
+                <div class="figure__item-fill"></div>
+                <div class="figure__item-imageBlock">
+                    <img id="imgBigEvent" src="" data-sliders--top-image>
+                    <div id="ytPlayer" class="ytPlayer"></div>
+                </div>
+            </div>
+        </figure>
+        <div class="sliders--top-header">
+            <a href="/" class="main-logo">
+                <img class="img-fluid" src="~/css/event/images/logos/main-logo.png">
+            </a>
+            <div class="timeline ml-md-auto">
+                <div class="timeline-wrapper">
+                    @for (int i = 0; i < dayCount; i++)
+                    {
+                        <div class="timeline-slide"><p class="timeline-date"><strong></strong><span></span></p></div>
+                    }
+                </div>
+                <i class="fal fa-chevron-left prev timeline__controller"></i>
+                <i class="fal fa-chevron-right next timeline__controller"></i>
+            </div>
+            <i class="fal fa-calendar-alt mr-md-auto" data-props="datepicker" data-toggle="modal"
+               data-target="#datepickerModal"></i>
+            <ul class="lang-list lang-list--white">
+                <li class="lang-list__item" data-lang-val="tr">
+                    <a class="lang-list__link">
+                        TR
+                    </a>
+                </li>
+                <li class="lang-list__item" data-lang-val="en">
+                    <a class="lang-list__link">
+                        EN
+                    </a>
+                </li>
+                <li class="lang-list__item" data-lang-val="de">
+                    <a class="lang-list__link">
+                        DE
+                    </a>
+                </li>
+                <li class="lang-list__item" data-lang-val="ru">
+                    <a class="lang-list__link">
+                        RU
+                    </a>
+                </li>
+            </ul>
+            <div class="header-nav--right">
+                <div class="time">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="sliders--top__contents">
+            <div class="row align-items-md-end justify-content-md-between">
+                <div class="col-auto--mdf text-center text-md-left">
+                    <div class="sliders--top-title__block">
+                        <h2 class="sliders--top-title" data-slideTitle-elem></h2>
+                    </div>
+                    <div class="sliders--top-description__block">
+                        <p class="sliders--top-description" data-slideDescription-elem>
+                        </p>
+                        <div class="row justify-content-end">
+                            <div class="col-auto">
+                                <span class="marker mr-3" data-location-elem>
+                                </span>
+                                <i class="fal fa-map-marker-alt"></i>
+                            </div>
+                            <div class="col-auto">
+                                <span class="d-block font-weight-bold text-right" data-timeElem></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-md-center justify-content-between no-gutters">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sliders--bottom">
+        <div class="sliders--bottom__time-slider-block">
+            <div class="time-slider"></div>
+        </div>
+        <div class="sliders--slides">
+            <ul class="slider--tab-menu">
+                <li class="slider--tab-menu-item active" data-show-tab="ENT">
+                    <a class="slider--tab-menu-link">
+                        <img class="slider--tab-menu-icon" src="/css/event/images/svg/entertainment.svg">
+                        @T["Entertainment"]
+                    </a>
+                </li>
+                <li class="slider--tab-menu-item" data-show-tab="FLA">
+                    <a class="slider--tab-menu-link">
+                        <img class="slider--tab-menu-icon" src="/css/event/images/svg/FOR-FLA.svg">
+                        @T["Flavours"]
+                    </a>
+                </li>
+                <li class="slider--tab-menu-item" data-show-tab="SPA">
+                    <a class="slider--tab-menu-link">
+                        <img class="slider--tab-menu-icon" src="/css/event/images/svg/FOR-SPA.svg">
+                        @T["Regius Spa"]
+                    </a>
+                </li>
+            </ul>
+            <div class="slider--tab-contents">
+                <div class="tab-contents active" data-slide-type="ENT" data-slide-type-icon="/css/event/images/svg/entertainment.svg">
+                    <div class="slider-container" data-slider="horizontal">
+                        <div class="slider-wrapper" id="eventItems">
+                            @foreach (var relatedEvent in Model.EventModels)
+                            {
+                                @if (relatedEvent.Images != null && relatedEvent.Images.Any())
+                                {
+                                    var smallImage = relatedEvent.Images.OrderBy(x => x.Height).First();
+                                    var bigImage = relatedEvent.Images.OrderByDescending(x => x.Height).First();
+                                    var mobileImage = relatedEvent.Images.Any(x => x.Height == 151) ? relatedEvent.Images.First(x => x.Height == 151) : bigImage;
+                                    var date = relatedEvent.StartDate.ToString("dd.MM.yyyy");
+                                    var startItems = relatedEvent.StartHour.Split(':');
+                                    var startHour = Convert.ToInt32(startItems[0]);
+                                    var startMinute = Convert.ToInt32(startItems[1]);
+                                    var endItems = relatedEvent.EndHour.Split(':');
+                                    var endHour = Convert.ToInt32(endItems[0]);
+                                    var endMinute = Convert.ToInt32(endItems[1]);
+                                    var labels = relatedEvent.Labels;
+                                    var locationLabel = "";
+                                    if (!string.IsNullOrEmpty(labels))
+                                    {
+                                        var labelVals = labels.Split(',');
+                                        locationLabel = labelVals.FirstOrDefault(x => x.StartsWith("Location"));
+                                    }
+                                    var endDate = relatedEvent.StartDate.AddHours(endHour).AddMinutes(endMinute);
+                                    var startValue = startHour * 60 + startMinute;
+                                    var endValue = endHour * 60 + endMinute;
+
+                                    if (startHour > endHour)
+                                    {
+                                        endDate = endDate.AddDays(1);
+                                        endValue = (endHour + 24) * 60 + endMinute;
+                                    }
+                                    else if (startHour < 6)
+                                    {
+                                        startValue = (startHour + 24) * 60 + startMinute;
+                                        endValue = (endHour + 24) * 60 + endMinute;
+                                    }
+
+                                    var slideClass = DateTime.Now > endDate ? "slider-slide--past" : "";
+                                    <div class="slider-slide eventSliders @slideClass" style="display:none;max-width:186px;" data-id="@relatedEvent.EventId" data-startvalue="@startValue" data-endvalue="@endValue" data-date="@date" data-starthour="@startHour" data-startminute="@startMinute" data-endhour="@endHour" data-endminute="@endMinute" data-image="@bigImage.Path">
+                                        <a href="javascript:void(0)" class="slider-slide__link">
+                                            <div class="slider-cards">
+                                                <span class="slider-cards__time">
+                                                    @startHour.ToString().PadLeft(2, '0'):@startMinute.ToString().PadLeft(2, '0') - @endHour.ToString().PadLeft(2, '0'):@endMinute.ToString().PadLeft(2, '0')
+                                                </span>
+                                                <figure class="slider-cards__image-block">
+                                                    <img class="slider-cards__image" src="/@smallImage.Path" width="@smallImage.Width" height="@smallImage.Height" data-bigimage-path="/@bigImage.Path" data-mobileimage-path="/@mobileImage.Path">
+                                                    @if (!string.IsNullOrEmpty(locationLabel))
+                                                    {
+                                                        <span class="marker" data-slide-location>
+                                                            @T[locationLabel]
+                                                            <i class="fal fa-map-marker-alt"></i>
+                                                        </span>
+                                                    }
+                                                </figure>
+                                                <figcaption class="slider-cards__contents">
+                                                    <h6 class="slider-cards__title" data-slide-title>
+                                                        @relatedEvent.Name
+                                                    </h6>
+                                                    <h6 style="display:none" data-slide-description>@relatedEvent.Description</h6>
+                                                    <h6 style="display:none" data-slide-detailType>@relatedEvent.EventTypeName</h6>
+                                                </figcaption>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                @foreach (var serviceType in serviceTypeList)
+                {
+                    if (serviceType.TypeCode == "KID")
+                    {
+                        continue;
+                    }
+                    var relatedServices = Model.TenantServiceModels.Where(x => x.ServiceTypeId == serviceType.Id).OrderBy(x => x.StartValue).ToList();
+                    <div class="tab-contents" data-slide-type="@serviceType.TypeCode" data-slide-type-icon="/css/event/images/svg/FOR-@(serviceType.TypeCode).svg">
+                        <div class="slider-container" data-slider="horizontal">
+                            <div class="slider-wrapper" id="serviceItems_@serviceType.TypeCode">
+                                @foreach (var relatedService in relatedServices)
+                                {
+                                    @if (relatedService.Images != null && relatedService.Images.Any())
+                                    {
+                                        var smallImage = relatedService.Images.OrderBy(x => x.Height).First();
+                                        var bigImage = relatedService.Images.OrderByDescending(x => x.Height).First();
+                                        var mobileImage = relatedService.Images.Any(x => x.Height == 151) ? relatedService.Images.First(x => x.Height == 151) : bigImage;
+                                        var startItems = relatedService.StartTime.Split(':');
+                                        var startHour = Convert.ToInt32(startItems[0]);
+                                        var startMinute = Convert.ToInt32(startItems[1]);
+                                        var endItems = relatedService.EndTime.Split(':');
+                                        var endHour = Convert.ToInt32(endItems[0]);
+                                        var endMinute = Convert.ToInt32(endItems[1]);
+                                        var endValue = endHour * 60 + endMinute;
+                                        var labels = relatedService.Labels;
+                                        var locationLabel = "";
+
+                                        if (!string.IsNullOrEmpty(labels))
+                                        {
+                                            var labelVals = labels.Split(',');
+                                            locationLabel = labelVals.FirstOrDefault(x => x.StartsWith("Location"));
+                                        }
+                                        <div class="slider-slide serviceSliders" data-id="@relatedService.Id" data-startvalue="@relatedService.StartValue" data-endvalue="@endValue" data-starthour="@startHour" data-startminute="@startMinute" data-endhour="@endHour" data-endminute="@endMinute">
+                                            <a href="javascript:void(0)" class="slider-slide__link">
+                                                <div class="slider-cards">
+                                                    <span class="slider-cards__time">
+                                                        @relatedService.StartTime - @relatedService.EndTime
+                                                    </span>
+                                                    <figure class="slider-cards__image-block">
+                                                        <img class="slider-cards__image" src="/@smallImage.Path" data-bigimage-path="/@bigImage.Path" data-mobileimage-path="/@mobileImage.Path">
+                                                        @if (!string.IsNullOrEmpty(locationLabel))
+                                                        {
+                                                            <span class="marker" data-slide-location>
+                                                                @T[locationLabel]
+                                                                <i class="fal fa-map-marker-alt"></i>
+                                                            </span>
+                                                        }
+                                                    </figure>
+                                                    <figcaption class="slider-cards__contents">
+                                                        <h6 class="slider-cards__title" data-slide-title>
+                                                            @relatedService.Name
+                                                        </h6>
+                                                        <h6 style="display:none" data-slide-description>@relatedService.Description</h6>
+                                                        <h6 style="display:none" data-slide-detailType>@relatedService.ServiceTypeName</h6>
+                                                    </figcaption>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="sh-controls">
+                <i class="fal fa-arrow-left prev"></i>
+                <i class="fal fa-arrow-right next"></i>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal modal--datepicker fade" id="datepickerModal" tabindex="-1" role="dialog"
+     aria-labelledby="datepickerModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <span class="btn--close text-white" data-dismiss="modal" aria-label="Close">
+                    <i class="fal fa-times"></i>
+                    <span>CLOSE</span>
+                </span>
+                <div class="row no-gutters--md">
+                    <div class="col-12 col-md-4 order-2 order-md-1">
+                        <input type="hidden" id="hdnShortDate" value="@Model.StartDate.ToString("dd.MM.yyyy")" />
+                        <input id="inpDaterangepicker" type="text" class="form-control" placeholder="@Model.StartDate.ToString("dd.MM.yyyy") - @Model.EndDate.ToString("dd.MM.yyyy")">
+                    </div>
+                    <input type="hidden" id="hdnSelectedId" value="0" />
+                    <input type="hidden" id="hdnTabIndex" value="0" />
+                    <input type="hidden" id="hdnCurrentValue" value="@(DateTime.Now.Hour * 60 + DateTime.Now.Minute)" />
+                    <input type="hidden" id="hdnIntervalId" value="" />
+                    <div class="col-12 col-md-4 order-3">
+                        <button class="btn btn--dull-orange" onclick="SearchByDateRefresh()" id="btnSubmit" style="max-height:42px" value="Submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/js/fecha.min.js"></script>
+    <script src="~/js/hotel-datepicker.min.js"></script>
+    <script src="~/js/swiper.min.js"></script>
+    <script src="~/lib_bower/moment/moment.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/living.js?v=12" asp-append-version="true"></script>
+    <script type="text/javascript">
+    var currentLang = "@lang";
+
+    $(document).ready(function () {
+        $(".timeline-date").on("click", function (e) {
+            var relatedDate = $(this).next().html();
+            $('#hdnShortDate').val(relatedDate);
+            SearchByDate(e, -1);
+        });
+        SearchByDate(document.createEvent('Event'), -1);
+
+        setLanguage(currentLang);
+    });
+
+    function SearchByDate(e, dateHourValue) {
+        if (dateHourValue == -1) {
+            dateHourValue = parseInt($("#hdnCurrentValue").val());
+        }
+        var relatedDate = $.trim($('#hdnShortDate').val());
+        var dateItems = relatedDate.split('.');
+        var date = new Date(dateItems[2], dateItems[1] - 1, dateItems[0]);
+        date.setDate(date.getDate() + 1);
+        var nextDate = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+        $(".eventSliders").hide();
+        var resultsDiv = $("#eventItems");
+        var index = 0;
+        var hasItem = 0;
+        var tabIndex = $("#hdnTabIndex").val();
+        var currentTimeValue = parseInt(dateHourValue);
+
+        resultsDiv.find("[data-date=\"" + relatedDate + "\"]").each(function () {
+            $(this).hide();
+            var startValue = $(this).attr("data-startvalue");
+            if (startValue >= 480) {
+                var endValue = $(this).attr("data-endValue");
+                if (startValue <= currentTimeValue && endValue >= currentTimeValue) {
+                    $(this).show();
+                    if (index == 0 && tabIndex == 0) {
+                        hasItem = 1;
+                        ClickEventThumbnail($(this).children(), e);
+                    }
+                    index++;
+                }
+            }
+        });
+        var reelTimeValue = 24 * 60 + currentTimeValue;
+        //Gece 00:00'dan sonra sabah 6'ya kadar event'lerin gelmesi için çalıştırılıyor.
+        resultsDiv.find("[data-date=\"" + nextDate + "\"]").each(function () {
+            $(this).hide();
+            var startValue = $(this).attr("data-startvalue");
+            if (startValue <= 360)
+            {
+                var endValue = $(this).attr("data-endValue");
+                if (startValue <= reelTimeValue && endValue >= reelTimeValue) {
+                    $(this).show();
+                    if (index == 0 && tabIndex == 0) {
+                        hasItem = 1;
+                        ClickEventThumbnail($(this).children(), e);
+                    }
+                    index++;
+                }
+            }
+        });
+
+        index = 0;
+        var serviceResultsDiv = $("#serviceItems_FLA");
+        serviceResultsDiv.children().each(function () {
+            $(this).hide();
+            var startValue = $(this).attr("data-startvalue");
+            var endValue = $(this).attr("data-endValue");
+            if (startValue <= currentTimeValue && endValue >= currentTimeValue) {
+                $(this).show();
+                if (index == 0 && tabIndex == 1) {
+                    hasItem = 1;
+                    ClickEventThumbnail($(this).children(), e);
+                }
+                index++;
+            }
+        });
+
+        index = 0;
+        serviceResultsDiv = $("#serviceItems_SPA");
+        serviceResultsDiv.children().each(function () {
+            $(this).hide();
+            var startValue = $(this).attr("data-startvalue");
+            var endValue = $(this).attr("data-endValue");
+            if (startValue <= currentTimeValue && endValue >= currentTimeValue) {
+                $(this).show();
+                if (index == 0 && tabIndex == 2) {
+                    hasItem = 1;
+                    ClickEventThumbnail($(this).children(), e);
+                }
+                index++;
+            }
+        });
+
+        if (hasItem == 0) {
+            SetDefaultValues();
+        }
+        else {
+            SetVisibleItems();
+        }
+
+        $('[data-slider]').each(function (i) {
+            $('[data-slider]')[i].swiper.update();
+        });
+    }
+
+        function SetVisibleItems() {
+            var tabIndex = $("#hdnTabIndex").val();
+            if (tabIndex != 0)
+                return;
+            var currentId = $("#hdnSelectedId").val();
+            var visibleItemStr = '';
+            $("#eventItems").find("[data-id=\"" + currentId + "\"]").nextAll(':visible').each(function () {
+                visibleItemStr += $(this).attr("data-id") + ",";
+            });
+
+            var oldIntervalId = $("#hdnIntervalId").val();
+            if (oldIntervalId != "") {
+                clearInterval(oldIntervalId);
+            }
+
+            if (visibleItemStr != "") {
+                if (visibleItemStr.indexOf(currentId) < 0) {
+                    visibleItemStr = currentId + "," + visibleItemStr;
+                }
+                var visibleItems = visibleItemStr.split(",");
+
+                if (visibleItems.length > 2) {
+                    var refreshIntervalId = setInterval(function () {
+                        currentId = $("#hdnSelectedId").val();
+                        for (var i = 0; i < visibleItems.length; i++) {
+                            if (visibleItems[i] == currentId) {
+                                if (i + 2 >= visibleItems.length) {
+                                    ClickEventThumbnail($("#eventItems [data-id=\"" + visibleItems[0] + "\"]").first().children(), document.createEvent('Event'));
+                                }
+                                else {
+                                    ClickEventThumbnail($("#eventItems [data-id=\"" + visibleItems[i + 1] + "\"]").first().children(), document.createEvent('Event'));
+                                }
+                                break;
+                            }
+                        }
+                    }, 3000);
+                    $("#hdnIntervalId").val(refreshIntervalId);
+                }
+            }
+        }
+
+
+
+    function SearchByDateRefresh() {
+        var dateValue = $('#inpDaterangepicker').val();
+        var url = window.location.origin + window.location.pathname + "?DateInfo=" + dateValue.replace(" - ", "-");
+        window.location.href = url;
+    }
+    </script>
+}

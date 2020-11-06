@@ -1,0 +1,32 @@
+body {
+    overflow: hidden;
+}
+
+a {
+    @extend %props--buttons;
+}
+
+button {
+    @extend %props--buttons;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin-bottom: 0;
+}
+
+figure {
+    margin-bottom: 0
+}
+
+p,label {
+    margin-bottom: 0;
+}
+
+[role=button] {
+
+    &:focus {
+        outline: none;
+        border: none;
+        box-shadow: none
+    }
+}

@@ -1,0 +1,12 @@
+@function calcPercent($value, $value2) {
+    @return ($value * 100) / $value2;
+}
+
+@function getFs($target) {
+    $vw-context: (1920 * 0.01);
+    @return ($target / $vw-context) * 1vw;
+}
+
+@function fluidSize($minVal, $maxVal, $minPixel, $maxPixel) {
+    @return calc(#{$minVal}px + (#{$maxVal} - #{$minVal}) * ((100vw - #{$minPixel}px) / (#{$maxPixel} - #{$minPixel})));
+}

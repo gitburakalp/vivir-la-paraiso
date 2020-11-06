@@ -1,0 +1,122 @@
+#ui-datepicker-div {
+  background-color: $color-white;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 0 1px rgba($color-pastel-black, 0.25);
+  z-index: 1003 !important;
+
+  @include media-breakpoint-down(sm) {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+  }
+}
+
+div#inpDatepicker {
+  position: relative;
+  top: 200px;
+  z-index: 9999;
+}
+
+.datepick-open {
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color-pastel-black, 0.75);
+    z-index: 1;
+  }
+}
+
+.ui-datepicker {
+  &-header {
+    padding: 10px 0;
+    border: none !important;
+    background-color: $color-white !important;
+  }
+
+  &-prev,
+  &-next {
+    position: absolute;
+    color: $color-pastel-black !important;
+
+    span {
+      background-image: none !important;
+    }
+
+    &::before {
+      font-weight: 300;
+      font-family: "Font Awesome 5 Pro";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &-title {
+    font-family: $v2_ff-sans-serif;
+    font-weight: 600;
+    text-align: center;
+    color: $color-pastel-black;
+  }
+
+  &-prev {
+    left: 4px;
+
+    &:before {
+      content: "\f053";
+    }
+  }
+
+  &-next {
+    right: 4px;
+
+    &:before {
+      content: "\f054";
+    }
+  }
+
+  &-calendar {
+    thead tr th {
+      font-size: 14px;
+      font-weight: 300;
+      color: $color-warm-grey;
+      text-align: center;
+    }
+
+    tbody td {
+      width: 25px;
+      height: 25px;
+
+      a,
+      span {
+        font-size: 16px;
+        border: none !important;
+        text-align: center;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  &-current-day {
+    > a {
+      background-color: $color-dull-orange !important;
+    }
+  }
+
+  &-today {
+    > a[class*="ui-state-"] {
+      background: $color-pastel-black;
+      color: $color-white;
+    }
+  }
+}

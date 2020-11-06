@@ -1,0 +1,16 @@
+%props {
+    &--buttons {
+        color: inherit;
+        cursor: pointer;
+
+        &:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none !important
+        }
+    }
+}

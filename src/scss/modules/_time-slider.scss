@@ -1,0 +1,143 @@
+%slider-tip {
+    position: absolute;
+    display: inline-block;
+    width: auto;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-120%);
+    height: auto;
+    color: $color-white;
+    border-radius: 0;
+    text-align: center;
+    font-size: 10px;
+    transition-property: opacity, top, visibility;
+    transition-timing-function: ease-in;
+    padding: 0 3px;
+    transition-delay: 0ms, 0ms, 200ms;
+
+    @include media-breakpoint-up(md) {
+        font-size: 0.875vw;
+    }
+}
+
+.sliders--bottom {
+
+    &__time-slider {
+
+        &-block {
+            position: relative;
+            background-color: $color-dark-two;
+            z-index: 18;
+
+            @include media-breakpoint-down(sm) {
+                padding: 0.5rem;
+            }
+
+            @include media-breakpoint-up(md) {
+                // margin-left: 15.5vw;
+                // margin-right: 6.25vw;
+                margin-left: 1vw;
+                margin-right: 1vw;
+                margin-bottom: 1.66667vh;
+            }
+
+            .time-slider {
+                cursor: pointer;
+
+                @include media-breakpoint-down(sm) {
+                    max-width: 95%;
+                    margin: 0 auto;
+                }
+            }
+
+            .ui-state {
+
+                &-hover {
+
+                    .ui-slider-tip {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+
+            .tip {
+                @extend %slider-tip;
+            }
+
+            .ui-slider-tip {
+                @extend %slider-tip;
+            }
+
+
+
+            .ui-widget {
+                &.ui-widget-content {
+                    border-radius: 0;
+                    border: none;
+                    background-color: transparent;
+                    position: relative;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        right: 0;
+                        height: 1px;
+                        background-color: $color-white;
+                    }
+                }
+
+                &-content {
+                    .ui-state {
+                        &-default {
+                            border-radius: 100%;
+                            width: 1.125rem;
+                            height: 1.125rem;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            background-color: $color-dull-orange;
+                            opacity: 1;
+                            z-index: 7;
+                            cursor: pointer;
+                            transition: all 350ms;
+
+                            @include media-breakpoint-up(md) {
+                                width: getFs(24);
+                                height: getFs(24);
+                            }
+
+                            &:focus {
+                                outline: none;
+                                border: none
+                            }
+
+                            &:not(.passive) {
+                                border-color: $color-dull-orange;
+
+                                .ui-slider-tip {
+                                    color: $color-dull-orange
+                                }
+                            }
+
+                            &.passive {
+                                background-color: $color-white;
+                                z-index: 6;
+                            }
+                        }
+
+                        &-active {
+
+                            ~ span {
+                                opacity: 0.35
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+}

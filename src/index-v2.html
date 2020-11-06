@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Living Rubi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" type="text/css" href="css/events-v2.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/libs/jquery-ui.min.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese");
+  </style>
+
+</head>
+
+<body>
+  <input type="hidden" id="hdnDefaultBigImage"
+    value="https://www.rubiplatinum.com/Storage/f7058a68-9db0-478e-a0cf-5f86b45c8761.jpg" />
+  <input type="hidden" id="hdnDayCount" value="21" />
+  <input type="hidden" id="hdnStartDate" value="26.07.2019" />
+  <input type="hidden" id="inpDatepicker" class="form-control" readonly />
+  <header class="header">
+    <nav class="header-nav">
+      <a href="#" class="header-nav__logo">
+        <img class="img-fluid" src="images/logos/main-logo.png" />
+      </a>
+      <ul class="header-nav__menu">
+        <li class="header-nav__menu-item " id="ENT">
+          <a href="#" class="header-nav__menu-link">
+
+            <div class="header-nav__menu-text">
+              <span>
+                Entertainment
+              </span>
+            </div>
+          </a>
+        </li>
+        <li class="header-nav__menu-item active" id="FLA">
+          <a href="#" class="header-nav__menu-link">
+            <div class="header-nav__menu-text">
+              <span>
+                Flavours
+              </span>
+            </div>
+          </a>
+        </li>
+        <li class="header-nav__menu-item" id="SPA">
+          <a href="#" class="header-nav__menu-link">
+            <div class="header-nav__menu-text">
+              <span>
+                Regius Spa
+              </span>
+            </div>
+          </a>
+        </li>
+        <li class="header-nav__menu-item" data-elem="dateButton">
+          <a href="#" class="header-nav__menu-link">
+            <span class="circle-calendar">
+              <i class="fal fa-calendar-alt"></i>
+            </span>
+            <div class="header-nav__menu-text">
+              <span>
+                Select a Date
+              </span>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <div class="timeline">
+        <div class="timeline-wrapper">
+          <div class="timeline-slide">
+            <p class="timeline-date">
+              <strong>26</strong><span>Fri<br />Jul</span>
+            </p>
+          </div>
+          <div class="timeline-slide">
+            <p class="timeline-date">
+              <strong>27</strong><span>Fri<br />Jul</span>
+            </p>
+          </div>
+          <div class="timeline-slide">
+            <p class="timeline-date">
+              <strong>28</strong><span>Fri<br />Jul</span>
+            </p>
+          </div>
+          <div class="timeline-slide">
+            <p class="timeline-date">
+              <strong>29</strong><span>Fri<br />Jul</span>
+            </p>
+          </div>
+          <div class="timeline-slide">
+            <p class="timeline-date">
+              <strong>30</strong><span>Fri<br />Jul</span>
+            </p>
+          </div>
+          <div class="timeline-slide">
+            <p class="timeline-date">
+              <strong>31</strong><span>Fri<br />Jul</span>
+            </p>
+          </div>
+        </div>
+        <i class="fal fa-chevron-left prev timeline__controller"></i>
+        <i class="fal fa-chevron-right next timeline__controller"></i>
+      </div>
+      <div class="dropdown">
+        <button class="btn language dropdown-toggle" type="button" id="languageButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          TR
+        </button>
+        <div class="dropdown-menu" aria-labelledby="languageButton">
+          <a class="dropdown-item" href="#">TR</a>
+          <a class="dropdown-item" href="#">EN</a>
+          <a class="dropdown-item" href="#">DE</a>
+          <a class="dropdown-item" href="#">RU</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="main">
+    <section class="main-bg"></section>
+    <section class="main-block">
+      <div class="main-block__info-section show">
+        <div class="main-slider main-slider--thumbs">
+          <div class="main-slider__wrapper"></div>
+        </div>
+      </div>
+      <div class="main-block__slider-section show">
+        <div class="main-slider main-slider--main">
+          <div class="main-slider__wrapper"></div>
+        </div>
+        <div class="main-slider__controls">
+          <div class="prev">
+            <i class="fal fa-chevron-left"></i>
+          </div>
+          <div class="next">
+            <i class="fal fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="timelineSlider"></section>
+    <section class="slider-cards--details">
+      <a class="close-btn"></a>
+      <div class="slider-cards--details-body">
+        <h3 data-elem="s-card__title"></h3>
+        <p data-elem="s-card__description"></p>
+        <p data-elem="s-card__time-block">
+          <span data-elem="s-card__time"></span><span class="ml-auto" data-elem="s-card__location"></span>
+        </p>
+        <a href="" data-elem="s-card__videoBtn" data-toggle="modal" data-target="#videoPopup">Watch</a>
+      </div>
+    </section>
+  </main>
+  <div class="modal fade" id="videoPopup" tabindex="-1" role="dialog" aria-labelledby="StaticVideoPopupElement"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog--md-centered modal--video" role="document">
+      <div class="modal-content">
+        <div class="modal-body mt-0">
+          <iframe src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/libs/jquery.min.js"></script>
+  <script src="js/libs/swiper.min.js"></script>
+  <script src="js/libs/jquery-ui.min.js"></script>
+  <script type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="js/libs/popper.min.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
+  <script src="js/living-v2.js"></script>
+</body>
+
+</html>

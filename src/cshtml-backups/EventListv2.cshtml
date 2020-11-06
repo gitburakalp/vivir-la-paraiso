@@ -1,0 +1,311 @@
+@using Klonbits.CMSBits.Application.Contracts.ContentManagement
+@using Klonbits.CMSBits.Application.Contracts.Application
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer T
+@model ClientEventListViewModel
+@{
+    var serviceTypeList = Model.ServiceTypeModels;
+    Layout = "~/Views/Shared/LeanLayoutv2.cshtml";
+    var dayCount = (int)Model.EndDate.Subtract(Model.StartDate).TotalDays;
+    var lang = System.Threading.Thread.CurrentThread.CurrentCulture.Name.Split("-")[0];
+    var locationLabel = "";
+}
+<input type="hidden" id="hdnDefaultBigImage" value="https://www.rubiplatinum.com/Storage/f7058a68-9db0-478e-a0cf-5f86b45c8761.jpg" />
+<input type="hidden" id="hdnDayCount" value="@dayCount" />
+<input type="hidden" id="hdnStartDate" value="@Model.StartDate.ToString("dd.MM.yyyy")" />
+<input type="hidden" id="inpDatepicker" class="form-control" readonly />
+
+<header class="header">
+    <nav class="header-nav">
+    <a href="#" class="header-nav__logo">
+        <img class="img-fluid" src="~/css/event/images/logos/main-logo.png" />
+    </a>
+    <ul class="header-nav__menu">
+        <li class="header-nav__menu-item active" id="ENT">
+        <a href="#" class="header-nav__menu-link">
+            <img
+            class="header-nav__menu-logo"
+            src="/css/event/images/svg/entertainment.svg"
+            />
+
+            <div class="header-nav__menu-text">
+            <span>
+                Entertainment
+            </span>
+            </div>
+        </a>
+        </li>
+        <li class="header-nav__menu-item" id="FLA">
+        <a href="#" class="header-nav__menu-link">
+            <img
+            class="header-nav__menu-logo"
+            src="/css/event/images/svg/FOR-FLA.svg"
+            />
+            <div class="header-nav__menu-text">
+            <span>
+                Flavours
+            </span>
+            </div>
+        </a>
+        </li>
+        <li class="header-nav__menu-item" id="SPA">
+        <a href="#" class="header-nav__menu-link">
+            <img
+            class="header-nav__menu-logo"
+            src="/css/event/images/svg/FOR-SPA.svg"
+            />
+            <div class="header-nav__menu-text">
+            <span>
+                Regius Spa
+            </span>
+            </div>
+        </a>
+        </li>
+        <li class="header-nav__menu-item" data-elem="dateButton">
+            <a href="#" class="header-nav__menu-link">
+              <span class="circle-calendar">
+                <i class="fal fa-calendar-alt"></i>
+              </span>
+              <div class="header-nav__menu-text">
+                <span>
+                  Select a Date
+                </span>
+              </div>
+            </a>
+          </li>
+    </ul>
+    <div class="timeline">
+        <div class="timeline-wrapper">
+            @for (int i = 0; i < dayCount; i++)
+            {
+                <div class="timeline-slide"><p class="timeline-date"><strong></strong><span></span></p></div>
+            }
+        </div>
+        <i class="fal fa-chevron-left prev timeline__controller"></i>
+        <i class="fal fa-chevron-right next timeline__controller"></i>
+    </div>
+    <div class="dropdown">
+        <button
+        class="btn language dropdown-toggle"
+        type="button"
+        id="languageButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        >
+        @lang.ToUpper()
+        </button>
+        <div class="dropdown-menu" aria-labelledby="languageButton">
+        <a class="dropdown-item" href="/tr/living-rubiv2">TR</a>
+        <a class="dropdown-item" href="/en/living-rubiv2">EN</a>
+        <a class="dropdown-item" href="/de/living-rubiv2">DE</a>
+        <a class="dropdown-item" href="/ru/living-rubiv2">RU</a>
+        </div>
+    </div>
+    </nav>
+    </header>
+    <main class="main">
+      <section class="main-bg"></section>
+      <section class="main-block">
+        <div class="main-block__info-section show">
+          <div class="main-slider main-slider--thumbs">
+            <div class="main-slider__wrapper"></div>
+          </div>
+        </div>
+        <div class="main-block__slider-section show">
+          <div class="main-slider main-slider--main">
+            <div class="main-slider__wrapper"></div>
+          </div>
+          <div class="main-slider__controls">
+            <div class="prev">
+              <i class="fal fa-chevron-left"></i>
+            </div>
+            <div class="next">
+              <i class="fal fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+      </section> 
+      <section class="timelineSlider"></section>
+      <section class="slider-cards--details">
+        <a class="close-btn"></a>
+        <div class="slider-cards--details-body">
+          <h3 data-elem="s-card__title"></h3>
+          <p data-elem="s-card__description"></p>
+          <p data-elem="s-card__time-block">
+            <span data-elem="s-card__time"></span
+            ><span class="ml-auto" data-elem="s-card__location"></span>
+          </p>
+          <a
+            href=""
+            data-elem="s-card__videoBtn"
+            data-toggle="modal"
+            data-target="#videoPopup"
+            >Watch</a
+          >
+        </div>
+      </section>
+    </main>
+    <div
+      class="modal fade"
+      id="videoPopup"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="StaticVideoPopupElement"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal--video"
+        role="document"
+      >
+      <a class="close-btn" data-dismiss="#videoPopup"></a>
+        <div class="modal-content">
+          <div class="modal-body mt-0">
+            <iframe src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+@section scripts{
+    <script type="text/javascript">
+
+    var appendSliderElems = function(serviceTypes, selectedDate) {
+switch (serviceTypes) {
+  case "ENT":
+    returnedJSON = getData.fromEvents(selectedDate);
+    break;
+  case "FLA":
+  case "SPA":
+    returnedJSON = getData.fromServices(serviceTypes);
+    break;
+}
+
+returnedJSON.forEach(data => {
+  var sliderElem = `<div id="${
+    data.id
+  }" class="main-slider__slide" data-title="${
+    data.name
+  }" data-description="${data.description}" data-startvalue="${
+    data.startValue
+  }" data-endvalue="${data.endValue}" data-starthour="${
+    data.startHour
+  }" data-startminute="${data.startMinute}" data-endhour="${
+    data.endHour
+  }" data-endminute="${data.endMinute}" data-imagepath="${
+    data.imageLg
+  }" data-location="${data.location}" data-videourl="${
+    data.videoUrl != undefined ? data.videoUrl : ""
+  }"><div class="slider-cards" style="background-image:url('${
+    data.imageLg
+  }')"><div class="slider-cards__title-section"><h4 class="slider-cards__title" data-slide-elem="title">${
+    data.name
+  }</h4><div class="row"><div class="col-12 col-md"><span data-elem="times" data-slide-elem="times">${data.startHour
+    .toString()
+    .padStart(2, "0")}:${data.startMinute
+    .toString()
+    .padStart(2, "0")} - ${data.endHour
+    .toString()
+    .padStart(2, "0")}:${data.endMinute
+    .toString()
+    .padStart(
+      2,
+      "0"
+    )}</span></div><div class="col-md-12 col-lg ml-lg-auto text-md-right"><span data-elem="location" data-slide-elem="location">${
+    data.location
+  }</span></div></div></div></div></div>`;
+
+  $(".main-slider--main .main-slider__wrapper").append(sliderElem);
+});
+
+  $('[data-elem="location"]').each((i,el)=>{
+    console.log(i,el);
+    $(el).text() == "" ? $(el).parent().addClass("d-none"):"";
+  });
+
+slideFunctions.slideTo();
+};
+
+      $(function() {
+        timelineInit();
+        headerNavMenuInit();
+        dateTimeline();
+        appendSliderElems("ENT");
+        mainSliderInit();
+
+        window.onload = () => {
+          expandSlide();
+        };
+
+        $("#videoPopup").each(function() {
+          var $this = $(this),
+            iframeElem = "";
+
+          $this.on("shown.bs.modal", function(e) {
+            var iframeUrl = `${
+              e.relatedTarget.dataset.videourl.includes(
+                "https://www.youtube.com/embed/"
+              )
+                ? e.relatedTarget.dataset.videourl
+                : `https://www.youtube.com/embed/${
+                    e.relatedTarget.dataset.videourl
+                  }`
+            }`;
+            var iframeProperties = "?autoplay=1&controls=1&showinfo=0&rel=0";
+            iframeElem = $(this).find("iframe");
+            iframeElem.attr("src", `${iframeUrl}${iframeProperties}`);
+          });
+
+          $this.on("hidden.bs.modal", function(e) {
+            iframeElem.attr("src", "");
+          });
+        });
+
+        $("#inpDatepicker").datepicker({
+          dateFormat: "dd.mm.yy",
+          buttonImageOnly: false,
+          minDate: new Date(),
+          beforeShow: function(input, inst) {
+            $("body").addClass("datepick-open");
+
+            if (ww > 767) {
+              var $dateBtn = $('[data-elem="dateButton"]');
+              var left = $dateBtn.offset().left;
+              var top = $dateBtn.offset().top;
+
+              setTimeout(() => {
+                inst.dpDiv.css({ left: left + "px", top: top + 40 + "px" });
+              }, 20);
+            }
+          },
+          onClose: function(selectedDate) {
+            $("body").removeClass("datepick-open");
+            var thisDate = $(
+              ".timeline .timeline-slide--active p ~ div"
+            ).text();
+
+            if (selectedDate != "" && selectedDate != thisDate) {
+
+              $(
+                ".timeline .timeline-slide:not([class*=duplicate]) p ~ div"
+              ).each(function(i, e) {
+                if (
+                  $(this)
+                    .text()
+                    .trim() == selectedDate
+                ) {
+                  timeline.slideTo(
+                    $(this)
+                      .closest(".timeline-slide")
+                      .index()
+                  );
+                }
+              });
+            }
+          }
+        });
+      });
+    </script>
+}
+
+

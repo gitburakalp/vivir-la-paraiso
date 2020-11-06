@@ -1,0 +1,96 @@
+/* =============================================================
+ * BASE STYLES
+ * ============================================================*/
+
+.datepicker {
+	box-sizing: border-box;
+	overflow: hidden;
+	position: absolute;
+	width: 260px;
+	z-index: 1;
+
+	@include mq_s {
+		width: 100%;
+	}
+
+	@include mq_m {
+		width: getFs(829);
+	}
+
+	&--open {
+		@include mq_m {
+			margin-top: calcPercent(27,1080) + vh;
+		}
+	}
+}
+
+.datepicker__inner {
+	overflow: hidden;
+}
+
+.datepicker__months {
+	@include mq_m {
+		overflow: hidden;
+	}
+}
+
+.datepicker__month {
+	border-collapse: collapse;
+	text-align: center;
+	width: 100%; 
+
+	@include mq_m {
+		width: getFs(350);
+	}
+}
+
+.datepicker__month--month1 {
+	@include mq_m {
+		float: left;
+	}
+}
+
+.datepicker__month--month2 {
+	display: none;
+
+	@include mq_m {
+		display: table;
+		float: right;
+	}
+}
+
+.datepicker__month-day--valid {
+	cursor: pointer;
+}
+
+.datepicker__month-day--lastMonth,
+.datepicker__month-day--nextMonth {
+	visibility: hidden;
+}
+
+.datepicker__month-button {
+	cursor: pointer;
+}
+
+.datepicker__month-button--disabled {
+	@include mq_m {
+		visibility: hidden;
+	}
+}
+
+.datepicker__info--feedback {
+	display: none;
+}
+
+.datepicker__info--error,
+.datepicker__info--help {
+	display: block;
+}
+
+.datepicker__close-button {
+	cursor: pointer;
+}
+
+.datepicker__tooltip {
+	position: absolute;
+}

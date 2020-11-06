@@ -1,0 +1,18 @@
+.datepick-section {
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+
+        .col:first-child {
+            padding: 0;
+        }
+
+        .col-auto {
+            padding-right: 0;
+            padding-left: 16px !important;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        margin-left: 5%;
+    }
+}

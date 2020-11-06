@@ -1,0 +1,15 @@
+%info-section-props {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-section {
+    > * {
+        @extend %info-section-props;
+    }
+
+    &__title {
+        display: block
+    }
+}

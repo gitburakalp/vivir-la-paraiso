@@ -1,0 +1,51 @@
+html {
+  @include media-breakpoint-down(sm) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+  }
+}
+
+body {
+  font-family: $v2_ff-sans-serif;
+  background-color: $color-pastel-black;
+  color: $color-white;
+
+  @include media-breakpoint-down(sm) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  &::before {
+    content: "\f00d";
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 300;
+    color: $color-white;
+    z-index: 1000;
+    font-size: 32px;
+    line-height: 1;
+  }
+}
+
+.form-control {
+  &[readonly] {
+    background-color: $color-white;
+  }
+}
+
+a:not([href]):not([tabindex]) {
+  color: $color-white;
+}
