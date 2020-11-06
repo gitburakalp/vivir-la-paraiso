@@ -72,7 +72,7 @@ section.timelineSlider.ui-slider {
         text-align: center;
         transform: translateY(-100%);
         z-index: 101;
-        text-shadow: 1px 1px 1px rgba(0,0,0,0.5)
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
       }
 
       input {
@@ -115,14 +115,14 @@ section.timelineSlider.ui-slider {
     border-radius: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #e0b37c;
+    background-color: rgba($color-white, 1);
     z-index: 2;
-    border: 1px solid rgba(#c7372f, 0.9);
+    border: 1px solid rgba($color-white, 0.9);
     filter: drop-shadow(0 0 2px $color-dull-orange);
 
     @include media-breakpoint-up(md) {
       background-color: $color-white;
-      border: 2px solid $color-dull-orange;
+      border-color: rgba(207, 227, 231, 0.85);
     }
   }
 

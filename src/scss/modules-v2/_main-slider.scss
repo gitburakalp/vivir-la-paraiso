@@ -65,7 +65,7 @@
       position: relative;
       padding: 1px;
       cursor: pointer;
-      transition: all 1s;
+      transition: all 450ms;
 
       &--past {
         filter: grayscale(100%);
@@ -76,9 +76,12 @@
       }
 
       &:not(.main-slider__slide--active) {
+        @include media-breakpoint-down(sm) {
+          transform: scale(0.9);
+        }
 
         .slider-cards {
-            opacity: 0.5;
+          opacity: 0.5;
         }
 
         @include media-breakpoint-up(md) {

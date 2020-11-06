@@ -324,12 +324,12 @@ var mainSliderInit = function () {
         slidePrevClass: "main-slider__slide--prev",
         breakpoints: {
           767: {
-            slidesPerView: 1.75,
+            slidesPerView: 1.375,
             spaceBetween: 0,
             // speed: 400,
             // touchRatio: 1.4,
             centeredSlides: true,
-            loop: false,
+            loop: true,
           },
         },
         on: {
